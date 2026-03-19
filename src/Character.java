@@ -2,9 +2,7 @@ package src;
 
 import java.util.ArrayList;
 
-enum Race {
-    ORC, ELF, DUORF, HUMAN
-}
+
 
 public class Character {
     private String name;
@@ -12,7 +10,6 @@ public class Character {
     private double health;
     private double mana;
     private Weapon weapon;
-    private Race race;
     private double strength;
     private double dexterity;
     private double constitution;
@@ -23,11 +20,11 @@ public class Character {
     private ArrayList<Weapon> armes;
     private Weapon armaEquipada;
 
-    public Character(String name, int age, Race race, double strength, double dexterity,
+    public Character(String name, int age,  double strength, double dexterity,
             double constitution, double intelligence, double wisdom, double charisma) {
         this.name = name;
         this.age = age;
-        this.race = race;
+       
         this.strength = strength;
         this.dexterity = dexterity;
         this.constitution = constitution;
@@ -57,13 +54,7 @@ public class Character {
         return this.age;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
-    }
 
-    public Race getRace() {
-        return this.race;
-    }
 
     public double getHealth() {
         return this.health;
@@ -83,6 +74,14 @@ public class Character {
 
     public double getStrength() {
         return this.strength;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public void setMana(double mana) {
+        this.mana = mana;
     }
 
     public void setStrength(double strength) {
@@ -138,7 +137,7 @@ public class Character {
     }
 
     public String toString() {
-        String info = "Nom: " + this.name + " Edat: " + this.age + " Raça: " + this.race +
+        String info = "Nom: " + this.name + " Edat: " + this.age +   " Raça: " + getRaca() +
                 " Salut: " + this.health + " Manà: " + this.mana +
                 " Arma: " + this.weapon + " Força: " + this.strength +
                 " Destresa: " + this.dexterity + " Constitució: " + this.constitution +
@@ -225,6 +224,22 @@ public class Character {
             this.intelligence = this.intelligence * 1.5;
             System.out.println("Has evolucionat al nivell " + this.powerLevel + "!");
         }
+    }
+
+    public void recalcularAtributs(){
+        this.health = this.constitution*50;
+        this.mana = this.intelligence*30;
+    }
+
+    public String getRaca() {
+    return "Sense raça";
+}
+    public double comprovarMax(double valor, int num){
+        valor = valor + num;
+         if(valor>20){
+            valor = 20;
+        }
+        return valor;
     }
 
 

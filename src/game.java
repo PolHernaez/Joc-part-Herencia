@@ -193,16 +193,6 @@ public class game {
             edat = llegirInt("Escriu l'edat del personatge");
         } while (edat <= 0);
         int opcioRaca = (int) (Math.random() * 4) + 1;
-        Race raca = Race.HUMAN;
-        if (opcioRaca == 1) {
-            raca = Race.ORC;
-        } else if (opcioRaca == 2) {
-            raca = Race.ELF;
-        } else if (opcioRaca == 3) {
-            raca = Race.DUORF;
-        } else if (opcioRaca == 4) {
-            raca = Race.HUMAN;
-        }
 
         int[] stats = { 5, 5, 5, 5, 5, 5 };
         int queden = 30;
@@ -214,7 +204,16 @@ public class game {
             }
         }
 
-        Character nou = new Character(nom, edat, raca, stats[0], stats[1], stats[2], stats[3], stats[4], stats[5]);
+        Character nou;
+        if (opcioRaca == 1) {
+            nou = new Orc(nom, edat, stats[0], stats[1], stats[2], stats[3], stats[4], stats[5]);
+        } else if (opcioRaca == 2) {
+            nou = new Elf(nom, edat, stats[0], stats[1], stats[2], stats[3], stats[4], stats[5]);
+        } else if (opcioRaca == 3) {
+            nou = new Duorf(nom, edat, stats[0], stats[1], stats[2], stats[3], stats[4], stats[5]);
+        } else {
+            nou = new Human(nom, edat, stats[0], stats[1], stats[2], stats[3], stats[4], stats[5]);
+        }
         String[] tipus = { "Espasa", "Destral", "Basto", "Arc" };
         for (int i = 0; i < 3; i++) {
             int random = (int) (Math.random() * 4);
@@ -249,16 +248,8 @@ public class game {
 
         System.out.println("Tria la raça: 1-ORC, 2-ELF, 3-NAN, 4-HUMÀ");
         int opcioRaca = llegirInt("");
-        Race raca;
-        if (opcioRaca == 1) {
-            raca = Race.ORC;
-        } else if (opcioRaca == 2) {
-            raca = Race.ELF;
-        } else if (opcioRaca == 3) {
-            raca = Race.DUORF;
-        } else {
-            raca = Race.HUMAN;
-        }
+       
+        
 
         double strength, dexterity, constitution, intelligence, wisdom, charisma;
         int total;
@@ -290,8 +281,16 @@ public class game {
             }
         } while (total != 60);
 
-        Character nou = new Character(nom, edat, raca, strength, dexterity, constitution, intelligence, wisdom,
-                charisma);
+        Character nou ;
+        if (opcioRaca == 1) {
+            nou = new Orc(nom, edat, strength, dexterity, constitution, intelligence, wisdom, charisma);
+        } else if (opcioRaca == 2) {
+            nou = new Elf(nom, edat, strength, dexterity, constitution, intelligence, wisdom, charisma);
+        } else if (opcioRaca == 3) {
+            nou = new Duorf(nom, edat, strength, dexterity, constitution, intelligence, wisdom, charisma);
+        } else {
+            nou = new Human(nom, edat, strength, dexterity, constitution, intelligence, wisdom, charisma);
+        }
         String seguir = "";
         do {
             Weapon arma = crearArmaManual();
