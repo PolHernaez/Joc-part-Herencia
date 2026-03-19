@@ -115,12 +115,12 @@ public class game {
                 atacant.cambiarArma(armes.get(opcioArma));
             }
             do {
-                resposta = llegirInt("Jugador  " + player + ": \n1- Atacar \n 2- Defensar");
-                if (resposta < 1 || resposta > 2) {
-                    System.out.println("Tria entre 1 i 2!");
+                resposta = llegirInt("Jugador  " + player + ": \n1- Atacar \n 2- Defensar\n 3- Evolucionar");
+                if (resposta < 1 || resposta > 3) {
+                    System.out.println("Tria entre 1 i 3!");
                 }
 
-            } while (resposta < 1 || resposta > 2);
+            } while (resposta < 1 || resposta > 3);
             switch (resposta) {
                 case 1:
                     double dany = atacant.atacar();
@@ -149,8 +149,10 @@ public class game {
                     }
                     System.out.println(atacant.getName() + " es defensa!");
                     break;
-                default:
+                case 3:
+                    atacant.powerUp();
                     break;
+
             }
             pj1.regenerarVida();
             pj1.regenerarMana();
@@ -248,8 +250,6 @@ public class game {
 
         System.out.println("Tria la raça: 1-ORC, 2-ELF, 3-NAN, 4-HUMÀ");
         int opcioRaca = llegirInt("");
-       
-        
 
         double strength, dexterity, constitution, intelligence, wisdom, charisma;
         int total;
@@ -281,7 +281,7 @@ public class game {
             }
         } while (total != 60);
 
-        Character nou ;
+        Character nou;
         if (opcioRaca == 1) {
             nou = new Orc(nom, edat, strength, dexterity, constitution, intelligence, wisdom, charisma);
         } else if (opcioRaca == 2) {
@@ -395,6 +395,7 @@ public class game {
                     type = "Destral";
                     break;
                 case 3:
+
                     type = "Basto";
                     break;
                 case 4:
