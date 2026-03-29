@@ -137,9 +137,16 @@ public class Character {
     }
 
     public String toString() {
+        String arma;
+        if(armaEquipada==null){
+            arma = "Cap";
+        }
+        else{
+          arma =  armaEquipada.getType();
+        }
         String info = "Nom: " + this.name + " Edat: " + this.age +   " Raça: " + getRaca() +
                 " Salut: " + this.health + " Manà: " + this.mana +
-                " Arma: " + this.weapon + " Força: " + this.strength +
+                " Arma: " + arma + " Força: " + this.strength +
                 " Destresa: " + this.dexterity + " Constitució: " + this.constitution +
                 " Intel·ligència: " + this.intelligence + " Saviesa: " + this.wisdom +
                 " Carisma: " + this.charisma + " Power Level: " + this.powerLevel;
@@ -222,6 +229,7 @@ public class Character {
             this.dexterity = this.dexterity * 1.5;
             this.constitution = this.constitution * 1.5;
             this.intelligence = this.intelligence * 1.5;
+            recalcularAtributs();
             System.out.println("Has evolucionat al nivell " + this.powerLevel + "!");
         }
     }

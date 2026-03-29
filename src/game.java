@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class game {
+public class Game {
     public static void main(String[] args) {
-        game p = new game();
+        Game p = new Game();
         p.principal();
     }
 
@@ -42,7 +42,13 @@ public class game {
     public void jugar1v1(ArrayList<Character> character) {
         Character pj1 = escollirPersonatge(character, 1, -1);
         Character pj2 = escollirPersonatge(character, 2, character.indexOf(pj1));
+        // Restaurar vida i maná
+        pj1.setHealth(pj1.getConstitution() * 50);
+        pj1.setMana(pj1.getIntelligence() * 30);
+        pj2.setHealth(pj2.getConstitution() * 50);
+        pj2.setMana(pj2.getIntelligence() * 30);
         System.out.println("Jugador 1: " + pj1.getName() + " vs Jugador 2: " + pj2.getName());
+
         combat(pj1, pj2);
     }
 
@@ -115,7 +121,7 @@ public class game {
                 atacant.cambiarArma(armes.get(opcioArma));
             }
             do {
-                resposta = llegirInt("Jugador  " + player + ": \n1- Atacar \n 2- Defensar\n 3- Evolucionar");
+                resposta = llegirInt("Jugador  " + player + ": \n 1- Atacar \n 2- Defensar\n 3- Evolucionar");
                 if (resposta < 1 || resposta > 3) {
                     System.out.println("Tria entre 1 i 3!");
                 }
@@ -251,12 +257,12 @@ public class game {
         System.out.println("Tria la raça: 1-ORC, 2-ELF, 3-NAN, 4-HUMÀ");
         int opcioRaca = llegirInt("");
 
-        double strength, dexterity, constitution, intelligence, wisdom, charisma;
+        double strength = 0, dexterity = 0, constitution = 0, intelligence = 0, wisdom = 0, charisma = 0;
         int total;
 
-        int restants = 60;
+        double restants = 60;
         do {
-
+            restants = 60;
             System.out.println("Punts a repartir restants: " + restants);
             strength = llegirCaracteristica("Força");
             restants -= strength;
@@ -273,12 +279,17 @@ public class game {
             wisdom = llegirCaracteristica("Saviesa");
             restants -= wisdom;
             System.out.println("Punts a repartir restants: " + restants);
-            charisma = llegirCaracteristica("Carisma");
-            total = (int) (strength + dexterity + constitution + intelligence + wisdom + charisma);
-            if (total != 60) {
-                System.out.println("Les característiques han de sumar 60! Has posat " + total);
-                restants = 60;
+
+            if (restants < 5 || restants > 20) {
+                System.out.println("Error: queden " + restants
+                        + " punts per Carisma però ha de ser entre 5 i 20. Torna a repartir.");
+                total = 0;
+            } else {
+                charisma = restants;
+                System.out.println("Carisma assignat automàticament: " + charisma + " punts.");
+                total = (int) (strength + dexterity + constitution + intelligence + wisdom + charisma);
             }
+
         } while (total != 60);
 
         Character nou;
